@@ -15,7 +15,7 @@
 ## (2. Optional: Create a virtual environment)
 
 ```console
-python -m venv venv
+python3 -m venv venv
 . venv/bin/activate
 ```
 
