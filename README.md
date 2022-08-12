@@ -42,7 +42,7 @@ It creates and prints the sheetId. Copy this Id and put it in [update_sheets.py]
 Run
 
 ```console
-python update_sheet.py
+python update_sheets.py
 ```
 
 ## References
