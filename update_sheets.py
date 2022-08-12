@@ -6,7 +6,7 @@ if __name__ == "__main__":
     service = su.create_authorized_service()
     # su.create_sheet(service)
 
-    sid = "1CpdxywGqpG7zxZCM8Ww9Lp09T1r8wDsoRemmFfBc5zc"
+    sid = "YOUR SPREADSHEET ID"
 
     data = get_data()
 
