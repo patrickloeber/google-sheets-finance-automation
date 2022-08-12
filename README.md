@@ -37,7 +37,7 @@ The first time you run this a browser will open and you have to login.
 
 It creates and prints the sheetId. Copy this Id and put it in [update_sheets.py](update_sheets.py), line 9.
 
-## 5. Authorize the app and create the sheet
+## 5. Update the sheets file
 
 Run
 
