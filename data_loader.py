@@ -31,27 +31,27 @@ class Expense:
 
     def _determine_category_and_importance(self):
         item = self.item.lower()
-        if "fee" in item:
+        if item in ["fee"]:
             return CATEGORY.FEES, IMPORTANCE.SHOULDNT_HAVE
-        if "uber eats" in item or "pizza" in item:
+        if item in ["uber eats", "pizza"]:
             return CATEGORY.EATING_OUT, IMPORTANCE.NICE_TO_HAVE
-        if "book" in item:
+        if item in ["book"]:
             return CATEGORY.SELF_DEVELOPMENT, IMPORTANCE.NICE_TO_HAVE
-        if "groceries" in item:
+        if item in ["groceries"]:
             return CATEGORY.FOOD, IMPORTANCE.ESSENTIAL
-        if "gym" in item:
+        if item in ["gym"]:
             return CATEGORY.HEALTH, IMPORTANCE.HAVE_TO_HAVE
-        if "phone" in item:
+        if item in ["phone"]:
             return CATEGORY.PHONE, IMPORTANCE.ESSENTIAL
-        if "gas" in item or "car" in item:
+        if item in ["gas", "car"]:
             return CATEGORY.CAR, IMPORTANCE.HAVE_TO_HAVE
-        if "clothes" in item:
+        if item in ["clothes"]:
             return CATEGORY.CLOTHES, IMPORTANCE.NICE_TO_HAVE
-        if "movies" in item:
+        if item in ["movies"]:
             return CATEGORY.ENTERTAINMENT, IMPORTANCE.NICE_TO_HAVE
-        if "ikea" in item:
+        if item in ["ikea"]:
             return CATEGORY.SHOPPING, IMPORTANCE.NICE_TO_HAVE
-        if "rent" in item:
+        if item in ["rent"]:
             return CATEGORY.HOUSING, IMPORTANCE.ESSENTIAL
         return CATEGORY.MISC, IMPORTANCE.NICE_TO_HAVE
 
