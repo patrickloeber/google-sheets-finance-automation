@@ -1,4 +1,4 @@
-import csv
+import csv, requests
 from enum import Enum
 
 class CATEGORY(Enum):
@@ -60,11 +60,13 @@ class Expense:
         return f"{self.item},{self.category.value},{self.price},{self.importance.value}"
 
 def get_data():
-    with open('expenses.csv', newline='') as csvfile:
-        reader = csv.reader(csvfile, delimiter=',')
+    expenses_url = "https://PLACE_GOOGLE_SHEETS_URL_HERE"
+    # Sample url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTw71oo5J_2Ov8eqgMczD3u6lMuHj_YYYCvOKCH9WGa6KdNjH-sHn062KOc-aH73npIGAqKQIewqfQg/pub?output=csv"
+    expenses_csv = requests.get(expenses_url, headers={'User-Agent': 'Mozilla/5.0'}, timeout=(3, 5))
+    reader = csv.reader(expenses_csv.text.splitlines())
 
-        expenses = []
-        for row in reader:
-            expenses.append(Expense(row[0], row[1]))
+    expenses = []
+    for row in reader:
+       expenses.append(Expense(row[0], row[1]))
 
     return expenses
