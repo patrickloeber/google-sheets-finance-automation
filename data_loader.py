@@ -1,4 +1,4 @@
-import csv
+import csv, requests
 from enum import Enum
 
 class CATEGORY(Enum):
@@ -31,27 +31,27 @@ class Expense:
 
     def _determine_category_and_importance(self):
         item = self.item.lower()
-        if "fee" in item:
+        if item in ["fee"]:
             return CATEGORY.FEES, IMPORTANCE.SHOULDNT_HAVE
-        if "uber eats" in item or "pizza" in item:
+        if item in ["uber eats", "pizza"]:
             return CATEGORY.EATING_OUT, IMPORTANCE.NICE_TO_HAVE
-        if "book" in item:
+        if item in ["book"]:
             return CATEGORY.SELF_DEVELOPMENT, IMPORTANCE.NICE_TO_HAVE
-        if "groceries" in item:
+        if item in ["groceries"]:
             return CATEGORY.FOOD, IMPORTANCE.ESSENTIAL
-        if "gym" in item:
+        if item in ["gym"]:
             return CATEGORY.HEALTH, IMPORTANCE.HAVE_TO_HAVE
-        if "phone" in item:
+        if item in ["phone"]:
             return CATEGORY.PHONE, IMPORTANCE.ESSENTIAL
-        if "gas" in item or "car" in item:
+        if item in ["gas", "car"]:
             return CATEGORY.CAR, IMPORTANCE.HAVE_TO_HAVE
-        if "clothes" in item:
+        if item in ["clothes"]:
             return CATEGORY.CLOTHES, IMPORTANCE.NICE_TO_HAVE
-        if "movies" in item:
+        if item in ["movies"]:
             return CATEGORY.ENTERTAINMENT, IMPORTANCE.NICE_TO_HAVE
-        if "ikea" in item:
+        if item in ["ikea"]:
             return CATEGORY.SHOPPING, IMPORTANCE.NICE_TO_HAVE
-        if "rent" in item:
+        if item in ["rent"]:
             return CATEGORY.HOUSING, IMPORTANCE.ESSENTIAL
         return CATEGORY.MISC, IMPORTANCE.NICE_TO_HAVE
 
@@ -60,11 +60,13 @@ class Expense:
         return f"{self.item},{self.category.value},{self.price},{self.importance.value}"
 
 def get_data():
-    with open('expenses.csv', newline='') as csvfile:
-        reader = csv.reader(csvfile, delimiter=',')
+    expenses_url = "https://PLACE_GOOGLE_SHEETS_URL_HERE"
+    # Sample url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTw71oo5J_2Ov8eqgMczD3u6lMuHj_YYYCvOKCH9WGa6KdNjH-sHn062KOc-aH73npIGAqKQIewqfQg/pub?output=csv"
+    expenses_csv = requests.get(expenses_url, headers={'User-Agent': 'Mozilla/5.0'}, timeout=(3, 5))
+    reader = csv.reader(expenses_csv.text.splitlines())
 
-        expenses = []
-        for row in reader:
-            expenses.append(Expense(row[0], row[1]))
+    expenses = []
+    for row in reader:
+       expenses.append(Expense(row[0], row[1]))
 
     return expenses
